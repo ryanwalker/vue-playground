@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>VuewJS</title>
+  <link rel="stylesheet" href="">
+  <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+
+
+  <div id="exercise">
+    <div>
+      <button @click="startEffect">
+      Start Effect
+    </button>
+      <button @click="stopEffect">
+      Stop Effect
+    </button>
+      <div class="effect" :class="[theClass, userClass]"></div>
+      <input type="text" v-model="userClass" />
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#exercise',
+      data: {
+        on: true,
+        theClass: '',
+        interval: '',
+        userClass: '',
+      },
+      methods: {
+        startEffect: function() {
+          var $vc = this
+          this.interval = setInterval(function() {
+            if ($vc.on) {
+              $vc.theClass = 'highlight'
+            } else {
+              $vc.theClass = 'shrink'
+            }
+            $vc.on = !$vc.on
+          }, 1000)
+        },
+        stopEffect: function() {
+          clearInterval(this.interval)
+        },
+      }
+    });
+  </script>
+
+
+  <style>
+    .effect {
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      margin: 10px 0;
+    }
+
+    .highlight {
+      background-color: red;
+    }
+
+    .shrink {
+      height: 50px;
+      width: 50px;
+    }
+
+    .blue {
+      background-color: blue;
+    }
+  </style>
+
+
+
+</body>
+
+</html>

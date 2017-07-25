@@ -1,0 +1,12 @@
+Vue directives
+
+v-on -> @
+v-bind -> :
+v-model
+v-once
+v-html
+
+watch
+computed
+methods
+el
