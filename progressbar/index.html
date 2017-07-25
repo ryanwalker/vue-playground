@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>VuewJS</title>
+  <link rel="stylesheet" href="">
+  <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+
+
+  <div id="exercise">
+    <div>
+      <button @click="start">
+      Start
+    </button>
+      <button @click="stop">
+      Stop
+    </button>
+      <div class="effect">
+        <div :style="progressStyle"></div>
+      </div>
+      <input type="text" v-model="color" />
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#exercise',
+      data: {
+        progressWidth: 0,
+        interval: '',
+        ascending: true,
+        color: 'green',
+      },
+      computed: {
+        progressStyle: function() {
+          return {
+            backgroundColor: this.color,
+            width: this.progressWidth + 'px',
+            height: '20px',
+          }
+        }
+      },
+      methods: {
+        start: function() {
+          var $vc = this
+          this.interval = setInterval(function() {
+            if ($vc.ascending) {
+              if ($vc.progressWidth < 200) {
+                $vc.progressWidth += 1;
+              } else {
+                $vc.ascending = false;
+              }
+            } else {
+              if ($vc.progressWidth > 0) {
+                $vc.progressWidth -= 1;
+              } else {
+                $vc.ascending = true;
+              }
+            }
+          }, 10)
+        },
+        stop: function() {
+          clearInterval(this.interval)
+        },
+      }
+    });
+  </script>
+
+
+  <style>
+    .effect {
+      width: 200px;
+      height: 20px;
+      border: 1px solid black;
+      margin: 10px 0;
+    }
+
+    .highlight {
+      background-color: red;
+    }
+
+    .shrink {
+      height: 50px;
+      width: 50px;
+    }
+
+    .blue {
+      background-color: blue;
+    }
+  </style>
+
+
+
+</body>
+
+</html>
